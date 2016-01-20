@@ -10,22 +10,22 @@ describe "#update_quality" do
 
     before { update_quality([item]) }
 
-    it "decrements quality by 1" do
+    it "decreases quality by 1" do
       expect(item.quality).to eq(9)
     end
 
-    it "decrements sell_in by 1" do
+    it "decreases sell_in by 1" do
       expect(item.sell_in).to eq(4)
     end
 
     context "sell by date has passed" do
       let(:initial_sell_in) { 0 }
 
-      it "decrements quality by 2" do
+      it "decreases quality by 2" do
         expect(item.quality).to eq(8)
       end
 
-      it "decrements sell_in by 1" do
+      it "decreases sell_in by 1" do
         expect(item.sell_in).to eq(-1)
       end
     end
@@ -45,7 +45,7 @@ describe "#update_quality" do
         expect(item.quality).to eq(11)
       end
 
-      context "Quality is 50" do
+      context "quality is 50" do
         let(:initial_quality) { 50 }
 
         it "does not increment quality beyond 50" do
