@@ -1,4 +1,4 @@
-require_relative '../lib/gilded_rose'
+require_relative '../lib/gilded_rose.rb'
 
 describe "#update_quality" do
 
@@ -127,7 +127,7 @@ describe "#update_quality" do
     before { update_quality(items) }
 
     it "properly changes qualities" do
-      expect(qualities).to eq([9, 50, 80, 33])
+      expect(items.map(&:quality)).to eq([9, 50, 80, 33])
     end
 
     it "properly changes sell_ins" do
