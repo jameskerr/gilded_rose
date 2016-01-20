@@ -1,4 +1,4 @@
-require_relative '../lib/gilded_rose.rb'
+require_relative '../lib/gilded_rose'
 
 describe "#update_quality" do
 
@@ -110,6 +110,22 @@ describe "#update_quality" do
         end
       end
     end
+
+    context "Conjured" do
+      let(:name) { "Conjured" } 
+
+      it "decreases in quality by 2" do
+        expect(item.quality).to eq(8)
+      end
+
+      context "quality is 0" do
+        let (:initial_quality) { 0 }
+
+        it "does not decrease quality below 0" do
+          expect(item.quality).to eq(0)
+        end
+      end
+    end
   end
 
   context "with multiple items" do
@@ -119,19 +135,22 @@ describe "#update_quality" do
         Item.new("Aged Brie", 0, 49),
         Item.new("Sulfuras, Hand of Ragnaros", 0, 80),
         Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 30),
+        Item.new("Conjured", 1, 50)
       ]
     }
-    let(:qualities) { items.map(&:quality) }
+
     let(:sell_ins)  { items.map(&:sell_in) }
+    let(:qualities) { items.map(&:quality) }
 
     before { update_quality(items) }
 
-    it "properly changes qualities" do
-      expect(items.map(&:quality)).to eq([9, 50, 80, 33])
+    it "properly changes sell_ins" do
+      expect(sell_ins).to eq([4, -1, 0, 3, 0])
     end
 
-    it "properly changes sell_ins" do
-      expect(sell_ins).to eq([4, -1, 0, 3])
+    it "properly changes qualities" do
+      expect(qualities).to eq([9, 50, 80, 33, 48])
     end
+
   end
 end

@@ -2,11 +2,13 @@ require_relative 'items/normal_item.rb'
 require_relative 'items/aged_brie_item.rb'
 require_relative 'items/backstage_pass_item.rb'
 require_relative 'items/sulfuras_item.rb'
+require_relative 'items/conjured_item.rb'
 
 ITEMS = Hash.new(NormalItem).merge({
   "Aged Brie"                                 => AgedBrieItem,
   "Sulfuras, Hand of Ragnaros"                => SulfurasItem,
-  "Backstage passes to a TAFKAL80ETC concert" => BackstagePassItem
+  "Backstage passes to a TAFKAL80ETC concert" => BackstagePassItem,
+  "Conjured"                                  => ConjuredItem
 })
 
 def update_quality(items)
